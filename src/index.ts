@@ -1,12 +1,15 @@
-import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import connectDB from './db';
+import express, { Application } from 'express';
+import userRoutes from './routes/userRoutes';
 
-const connectDB = async (): Promise<void> => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI || '');
-    console.log('MongoDB Connected...');
-  } catch (error) {
-    console.log('Error', error);
-  }
-};
+dotenv.config();
+connectDB();
 
-export default connectDB;
+const app: Application = express();
+app.use(express.json());
+
+app.use('/api/users', userRoutes);
+
+const PORT: number = parseInt(process.env.PORT || '5000', 10);
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
