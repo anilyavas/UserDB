@@ -11,5 +11,5 @@ app.use(express.json());
 
 app.use('/api/users', userRoutes);
 
-const PORT: number = parseInt(process.env.PORT || '5000', 10);
+const PORT: number = parseInt(process.env.PORT || '5001', 10);
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
